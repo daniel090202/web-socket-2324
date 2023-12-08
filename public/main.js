@@ -71,12 +71,10 @@ messageInput.addEventListener("blur", (e) => {
 });
 
 socket.on("clients-total", (data) => {
-  console.log(data);
   clientsTotal.innerText = `Total members in conversation: ${data}`;
 });
 
 socket.on("chat-message", (data) => {
-  console.log(data);
   addMessageToUI(false, data);
 });
 
