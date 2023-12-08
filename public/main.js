@@ -14,8 +14,9 @@ function sendMessage() {
   const data = {
     name: nameInput.value,
     message: messageInput.value,
-    dateTime: new Date(),
+    sentTime: new Date(),
   };
+
   socket.emit("message", data);
   addMessageToUI(true, data);
   messageInput.value = "";
@@ -23,13 +24,13 @@ function sendMessage() {
 
 function addMessageToUI(isOwnMessage, data) {
   clearFeedback();
-  
+
   const element = `
     <li class="${isOwnMessage ? "message-right" : "message-left"}">
       <p class="message">
         <span>${data.message}</span>
         <span class="message-details">${data.name} - ${moment(
-    data.dateTime
+    data.sentTime
   ).fromNow()}</span>
       </p>
     </li>`;
@@ -42,7 +43,7 @@ function scrollToBottom() {
 }
 
 function clearFeedback() {
-  document.querySelectorAll("li.message-feedback").forEach(element => {
+  document.querySelectorAll("li.message-feedback").forEach((element) => {
     element.parentNode.removeChild(element);
   });
 }
@@ -71,7 +72,7 @@ messageInput.addEventListener("blur", (e) => {
 });
 
 socket.on("clients-total", (data) => {
-  clientsTotal.innerText = `Total members in conversation: ${data}`;
+  clientsTotal.innerText = `${data} members`;
 });
 
 socket.on("chat-message", (data) => {

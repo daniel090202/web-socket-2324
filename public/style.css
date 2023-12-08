@@ -8,10 +8,6 @@
 }
 
 body {
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
     display: grid;
     place-items: center;
     background-color: #ebebeb;
@@ -28,6 +24,12 @@ body {
     overflow: hidden;
 }
 
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .name {
     display: flex;
     font-size: 32px;
@@ -37,12 +39,16 @@ body {
     background-color: #ebebeb;
 }
 
-.name > spna {
+.name > span {
     color: #bbb;
 }
 
+.name-icon {
+    font-size: 18px;
+}
+
 .name-input {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     color: #7e7e7e;
     flex-grow: 1;
@@ -60,6 +66,10 @@ body {
     height: 600px;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+.welcome-message {
+    text-align: center;
 }
 
 .message-left, 
@@ -135,6 +145,7 @@ body {
 }
 
 .clients-total {
+    font-size: 18px;
     margin: 20px 0;
     color: #7e7e7e;
 }

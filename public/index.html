@@ -8,20 +8,23 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
-    <title>Chap With Us</title>
+    <title>Chat With Us</title>
 </head>
 
 <body>
     <h1 class="title">Share your thoughts</h1>
     <div class="container">
-        <div class="name">
-            <span class="name-icon">
-                <i class="fa fa-user"></i>
-            </span>
-            <input type="text" id="name-input" class="name-input" value="anonymous" maxlength="20">
+        <div class="header">
+            <div class="name">
+                <span class="name-icon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" id="name-input" class="name-input" value="anonymous" maxlength="20">
+            </div>
+            <h3 class="clients-total" id="clients-total"></h3>
         </div>
         <ul class="message-container" id="message-container">
-            
+            <h4 class="welcome-message">Welcome to chat box</h4>
         </ul>
 
         <form class="message-form" id="message-form">
@@ -33,7 +36,6 @@
             </button>
         </form>
     </div>
-    <h3 class="clients-total" id="clients-total"></h3>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"
