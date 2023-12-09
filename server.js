@@ -4,15 +4,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const Message = require('./src/models/MessageModel');
+const Message = require("./src/models/MessageModel");
 
 const app = express();
 const port = process.env.PORT || 8080;
 
 mongoose
-  .connect("mongodb://localhost/messenger",{
+  .connect("mongodb://localhost/messenger", {
     useNewUrlParser: true,
-    useUnifiedTopology: true  
+    useUnifiedTopology: true,
   })
   .then(() => {
     const server = app.listen(port, () => {
@@ -25,13 +25,15 @@ mongoose
     socket_io.on("connection", onConnected);
 
     function onConnected(socket) {
-      console.log(socket.id);
       socketsConnected.add(socket.id);
 
       socket_io.emit("clients-total", socketsConnected.size);
 
+      Message.find().then((messages) => {
+        socket.emit("messages", messages);
+      });
+
       socket.on("disconnected", () => {
-        console.log("Socket disconnected: " + socket.id);
         socketsConnected.delete(socket.id);
         socket_io.emit("clients-total", socketsConnected.size);
       });
@@ -39,7 +41,7 @@ mongoose
       socket.on("message", (data) => {
         const message = new Message(data);
         message.save();
-       
+
         socket.broadcast.emit("chat-message", data);
       });
 

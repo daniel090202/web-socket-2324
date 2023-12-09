@@ -55,24 +55,30 @@ messageForm.addEventListener("submit", (e) => {
 
 messageInput.addEventListener("focus", (e) => {
   socket.emit("feedback", {
-    feeback: `${nameInput.value} is typing a message`,
+    feedback: `${nameInput.value} is typing a message`,
   });
 });
 
 messageInput.addEventListener("keypress", (e) => {
   socket.emit("feedback", {
-    feeback: `${nameInput.value} is typing a message`,
+    feedback: `${nameInput.value} is typing a message`,
   });
 });
 
 messageInput.addEventListener("blur", (e) => {
   socket.emit("feedback", {
-    feeback: "",
+    feedback: "",
   });
 });
 
 socket.on("clients-total", (data) => {
   clientsTotal.innerText = `${data} members`;
+});
+
+socket.on("messages", (data) => {
+  for (const message of data) {
+    addMessageToUI(false, message);
+  }
 });
 
 socket.on("chat-message", (data) => {
